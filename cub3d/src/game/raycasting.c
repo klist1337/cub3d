@@ -76,8 +76,8 @@ void	draw_in_window(t_mlx *mlx)
 
 void	raycaster(t_mlx *mlx)
 {
-	//floorcast(mlx); // texture for floor and celling
-	floorcast_color(mlx); // color for floor and celling
+	floorcast(mlx); // texture for floor and celling
+	//floorcast_color(mlx); // color for floor and celling
 	draw_in_window(mlx);
 }
 

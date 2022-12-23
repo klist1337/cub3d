@@ -12,9 +12,18 @@
 
 #include "../../include/cub3d.h"
 
+void	minimap(t_mlx *mlx)
+{
+
+}
+
+
 int	main_loop(t_mlx *mlx)
 {
 	raycaster(mlx);
+
+	mlx_string_put(mlx->mlx, mlx->win, 10, 10, 0xFFFFFF, "Hello world!");
+
 	draw(mlx);
 	return (0);
 }

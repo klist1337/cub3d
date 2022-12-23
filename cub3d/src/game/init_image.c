@@ -31,6 +31,55 @@
 // 	}
 // }
 
+void	put_pixel(t_mlx *mlx, int x, int y, int color)
+{
+	char *pixel;
+
+	pixel = (char *)mlx->img.data + (y * mlx->img.size_line + x * (mlx->img.bpp / 8));
+	*(int *)pixel = color;
+//	*pixel = (y * mlx->img.size_line) + (x * 4);
+//	mlx->img.data[*pixel + 0] = (int )((color >> 16) & 0xFF);
+//	mlx->img.data[*pixel + 1] = (unsigned char)((color >> 8) & 0xFF);
+//	mlx->img.data[*pixel + 2] = (unsigned char)(color & 0xFF);
+//	mlx->img.data[*pixel + 3] = (unsigned char)(color & 0xFF);
+
+
+}
+
+void dda(float x1,float y1,float x2,float y2,t_mlx *mlx)
+{
+	float x,y;
+	int i;
+	float step;
+	float dx = fabs(x2-x1);
+	float dy = fabs(y2-y1);
+
+	if(dx>=dy)
+		step=dx;
+	else
+		step=dy;
+
+	dx=dx/step;
+	dy=dy/step;
+
+	x=x1;
+	y=y1;
+
+	i=1;
+	while(i<=step)
+	{
+		put_pixel(mlx,x,y,0x00FF00);
+//		putpixel(x,y,5);
+//		mlx_pixel_put(mlx, mlx->win, x, y, 0x00FF0000);
+		x=x+dx;
+		y=y+dy;
+		i=i+1;
+	}
+}
+
+
+
+
 void	draw(t_mlx *mlx)
 {
 	int	x;
@@ -45,7 +94,22 @@ void	draw(t_mlx *mlx)
 			mlx->img.data[y * W + x] = mlx->buffer[y][x];
 		}
 	}
+	dda(0,10,100,100,mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
+
+//	y = 0;
+//	while(y < mlx->height)
+//	{
+//		int x = 0;
+//		while(x <  mlx->width_tab[y])
+//		{
+//			mlx_pixel_put(mlx, mlx->win, x, y, 0x00FF0000);
+//			x++;
+//		}
+//		y++;
+//		printf("\n");
+//	}
+
 }
 
 void	load_image(t_mlx *mlx, int *texture, char *path, t_img *img)

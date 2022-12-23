@@ -38,6 +38,7 @@ get_next_line_utils.c\
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
+CFLAGS =
 LIBFLAGS = -lmlx -framework OpenGL -framework AppKit
 OBJ = $(SRC:.c=.o)
 INC = cube3d.h
