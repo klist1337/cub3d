@@ -3,28 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassofi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: acouliba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 09:17:39 by eassofi           #+#    #+#             */
-/*   Updated: 2021/11/15 15:40:00 by eassofi          ###   ########.fr       */
+/*   Created: 2021/11/01 16:09:31 by acouliba          #+#    #+#             */
+/*   Updated: 2021/11/20 15:58:45 by acouliba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	const char	*s;
-	char		*d;
+	size_t			i;
+	unsigned char	*cdest;
+	unsigned char	*csrc;
 
-	s = src;
-	d = dst;
-	if (s != d)
+	cdest = (unsigned char *)dst;
+	csrc = (unsigned char *)src;
+	i = 0;
+	if (!dst && !src)
+		return (NULL);
+	while (i < n)
 	{
-		while (n--)
-		{
-			*d++ = *s++;
-		}
+		cdest[i] = csrc[i];
+		i++;
 	}
 	return (dst);
 }
+
+/*#include <stdio.h>
+#include <string.h>
+int main()
+{
+   char	csrc[4] = "hel";
+   char	dest[4];
+   char	*p = ft_memcpy(0, 0, 4 * sizeof(char));
+   //for(int i  = 0; i< 4;i++)
+   //{
+   	printf("%p\n", p);
+   //}
+   return 0;
+}*/

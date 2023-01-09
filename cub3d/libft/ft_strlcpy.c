@@ -3,31 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassofi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: acouliba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 10:35:02 by eassofi           #+#    #+#             */
-/*   Updated: 2021/11/15 20:09:22 by eassofi          ###   ########.fr       */
+/*   Created: 2021/09/23 14:15:24 by acouliba          #+#    #+#             */
+/*   Updated: 2021/11/20 16:25:43 by acouliba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t	len_src;
-	size_t	len;
+	size_t	i;
 
-	len_src = 0;
-	len = dstsize - 1;
-	while (src[len_src])
-		len_src++;
-	if (!dstsize)
-		return (len_src);
-	while (*src && len > 0)
+	i = 0;
+	if (dstsize > 0)
 	{
-		*dst++ = *src++;
-		len--;
+		while (i < (dstsize - 1) && src[i])
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = 0;
 	}
-	*dst = '\0';
-	return (len_src);
+	return (ft_strlen(src));
 }
+
+/*#include<stdio.h>
+#include<string.h>
+int	main()
+{
+	char	arr[5];
+	printf("%zu\n", strlcpy(arr,"haha", 0));
+	printf("%s\n", arr);
+}
+*/

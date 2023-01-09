@@ -12,24 +12,14 @@
 
 #include "../../include/cub3d.h"
 
-// void	put_color(t_mlx *mlx, int x, int y)
-// {
-// 	int	pixel;
 
-// 	pixel = (x + y * W) * 4;
-// 	mlx->img.data[pixel + 0] = (unsigned char)((mlx->color >> 16) & 0xFF);
-// 	mlx->img.data[pixel + 1] = (unsigned char)((mlx->color >> 8) & 0xFF);
-// 	mlx->img.data[pixel + 2] = (unsigned char)(mlx->color & 0xFF);
-// }
-
-// void	verline(int x, int draw_start, int draw_end, t_mlx *mlx)
-// {
-// 	while (draw_start < draw_end)
-// 	{
-// 		put_color(mlx, x, draw_start);
-// 		draw_start++;
-// 	}
-// }
+//void	put_pixel(t_s settings, int x, int y, int color)
+//{
+//	char	*pixel;
+//
+//	pixel = settings.addr + (y * settings.line_len + x * (settings.bpp / 8));
+//	*(int *)pixel = color;
+//}
 
 void	put_pixel(t_mlx *mlx, int x, int y, int color)
 {
@@ -37,47 +27,87 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color)
 
 	pixel = (char *)mlx->img.data + (y * mlx->img.size_line + x * (mlx->img.bpp / 8));
 	*(int *)pixel = color;
-//	*pixel = (y * mlx->img.size_line) + (x * 4);
-//	mlx->img.data[*pixel + 0] = (int )((color >> 16) & 0xFF);
-//	mlx->img.data[*pixel + 1] = (unsigned char)((color >> 8) & 0xFF);
-//	mlx->img.data[*pixel + 2] = (unsigned char)(color & 0xFF);
-//	mlx->img.data[*pixel + 3] = (unsigned char)(color & 0xFF);
-
-
 }
 
-void dda(float x1,float y1,float x2,float y2,t_mlx *mlx)
+void dda(t_point p1, t_point p2,t_mlx *mlx)
 {
-	float x,y;
-	int i;
-	float step;
-	float dx = fabs(x2-x1);
-	float dy = fabs(y2-y1);
+	// calculate the dx and dy values
+	int dx = p2.x - p1.x;
+	int dy = p2.y - p1.y;
 
-	if(dx>=dy)
-		step=dx;
-	else
-		step=dy;
+	// calculate the number of steps needed
+	int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
 
-	dx=dx/step;
-	dy=dy/step;
+	// calculate the increment in x and y for each step
+	float xIncrement = dx / (float) steps;
+	float yIncrement = dy / (float) steps;
 
-	x=x1;
-	y=y1;
+	// start from the first point
+	float x = p1.x;
+	float y = p1.y;
 
-	i=1;
-	while(i<=step)
+	// draw the line
+	for (int i = 0; i <= steps; i++)
 	{
-		put_pixel(mlx,x,y,0x00FF00);
-//		putpixel(x,y,5);
-//		mlx_pixel_put(mlx, mlx->win, x, y, 0x00FF0000);
-		x=x+dx;
-		y=y+dy;
-		i=i+1;
+		// plot the current point
+//		plot(round(x), round(y));
+		put_pixel(mlx, (int)x, (int)y, 0xFFFFFF);
+
+		// increment the x and y values
+		x += xIncrement;
+		y += yIncrement;
 	}
 }
 
+void	square(int x, int y, int radius, t_mlx *mlx)
+{
+	t_point	fake_p1;
+	t_point	fake_p2;
 
+	fake_p1.x = x - radius;
+	fake_p1.y = y - radius;
+	fake_p2.x = x + radius;
+	fake_p2.y = y - radius;
+	while (fake_p2.y <= y + radius)
+	{
+		dda(fake_p1, fake_p2, mlx);
+		fake_p2.y++;
+		fake_p1.y++;
+	}
+}
+
+void draw_map(t_mlx *mlx)
+{
+	int		i;
+	int		j;
+	int 	radius;
+	int 	x;
+	int 	y;
+
+	radius = 2;
+	i = 0;
+	j = 0;
+	t_point p1 = {.x = 0, .y = 10};
+	t_point p2 = {.x = 100, .y = 200};
+//	dda(p1, p2, mlx);
+//	square(100, 100, 2, mlx);
+
+	y = j;
+	while (j < mlx->height)
+	{
+		i = 0;
+		x = i;
+		while (i < mlx->width_tab[j]){
+			if (mlx->matrix[j][i] == 1){
+				square(x, y, radius, mlx);
+			}
+			x += radius * 2 + 1;
+			i++;
+		}
+		y += radius * 2 + 1;
+		j++;
+	}
+}
 
 
 void	draw(t_mlx *mlx)
@@ -94,7 +124,7 @@ void	draw(t_mlx *mlx)
 			mlx->img.data[y * W + x] = mlx->buffer[y][x];
 		}
 	}
-	dda(0,10,100,100,mlx);
+	draw_map(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
 
 //	y = 0;

@@ -3,22 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassofi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: acouliba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/13 17:25:52 by eassofi           #+#    #+#             */
-/*   Updated: 2021/11/13 21:06:51 by eassofi          ###   ########.fr       */
+/*   Created: 2021/11/04 18:15:06 by acouliba          #+#    #+#             */
+/*   Updated: 2021/11/20 16:08:24 by acouliba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
+#include <unistd.h>
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	if (fd < 0 || !s)
+	if (!s)
 		return ;
 	while (*s)
-	{
-		write(fd, s, 1);
-		s++;
-	}
+		write(fd, s++, sizeof(char));
 }

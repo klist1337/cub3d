@@ -3,35 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassofi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: acouliba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 20:54:38 by eassofi           #+#    #+#             */
-/*   Updated: 2021/11/15 20:23:21 by eassofi          ###   ########.fr       */
+/*   Created: 2021/11/02 12:12:16 by acouliba          #+#    #+#             */
+/*   Updated: 2021/11/20 16:37:44 by acouliba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	needle_len;
 	size_t	i;
+	size_t	j;
+	size_t	length;
+	char	*str;
 
-	needle_len = ft_strlen(needle);
+	str = (char *)haystack;
+	length = ft_strlen(needle);
+	if (!length)
+		return (str);
 	i = 0;
-	if (*needle == '\0')
+	while (str[i] && i < len)
 	{
-		return ((char *) haystack);
-	}
-	if (len == 0)
-		return (0);
-	while (haystack[i] && i <= (len - needle_len))
-	{
-		if (0 == ft_strncmp((haystack + i), needle, needle_len))
+		j = 0;
+		if (str[i] == needle[j])
 		{
-			return ((char *)(haystack + i));
+			while ((str[i + j] == needle[j]) && str[i + j] && (i + j) < len)
+				j++;
+			if (j == length)
+				return (str + i);
 		}
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
+
+/*#include<string.h>
+#include<stdio.h>
+
+int	main()
+{
+
+	printf("%s\n", ft_strnstr("aaabcabcd", "aabc", -1));
+}*/

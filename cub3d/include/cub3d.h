@@ -13,10 +13,11 @@
 #ifndef CUB3D_H
 
 # define CUB3D_H
-# include "mlx.h"
+//# include "mlx.h"
+# include "../miniLibX/mlx.h"
 # include <math.h>
 # include <sys/time.h>
-# include "../get_next_line/get_next_line.h"
+# include "../src/get_next_line/get_next_line.h"
 # include "../libft/libft.h"
 
 # define ESC 53
@@ -102,6 +103,11 @@ typedef struct s_img
 	int				img_width;
 	int				img_height;
 }						t_img;
+
+typedef struct s_point{
+	int		x;
+	int		y;
+} t_point;
 
 typedef struct s_mlx
 {

@@ -3,53 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassofi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: acouliba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/10 21:33:50 by eassofi           #+#    #+#             */
-/*   Updated: 2021/11/15 20:04:13 by eassofi          ###   ########.fr       */
+/*   Created: 2021/11/03 12:07:30 by acouliba          #+#    #+#             */
+/*   Updated: 2021/11/20 16:23:30 by acouliba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static void	ft_strcpy(char const *s1, char	*res)
+static void	ft_strcpy(char	*dst, char	*src)
 {
-	int		len_s1;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	len_s1 = ft_strlen(s1);
-	while (i < len_s1)
+	while (src[i])
 	{
-		res[i] = s1[i];
+		dst[i] = src[i];
 		i++;
 	}
+	dst[i] = 0;
 }
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	len_s1;
-	size_t	len_s2;
+	char	*res;
 	size_t	i;
-	size_t	j;
-	char	*ret;
+	size_t	len;
 
-	if (s1 == 0 || s2 == 0)
+	if (!s1 || !s2)
+		return (NULL);
+	i = ft_strlen(s1);
+	len = i + ft_strlen(s2) + 1;
+	res = (char *)malloc(len * sizeof(char));
+	if (!res)
 		return (0);
-	i = 0;
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	ret = (char *)malloc(sizeof(char) * (len_s1 + len_s2 + 1));
-	if (ret == 0)
-		return (0);
-	ft_strcpy(s1, ret);
-	i = len_s1;
-	j = 0;
-	while (s2[j] && j < len_s2)
-	{
-		ret[i + j] = s2[j];
-		j++;
-	}
-	ret[i + j] = '\0';
-	return (ret);
+	ft_strcpy(res, (char *)s1);
+	ft_strcpy(res + i, (char *)s2);
+	return (res);
 }

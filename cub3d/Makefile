@@ -10,59 +10,74 @@
 #                                                                              #
 # **************************************************************************** #
 
-VPATH = include src/game src/parsing get_next_line
 NAME = cube3d
 
-SRC = color.c\
-color2.c\
-cub3d_utils.c\
-cub3d_utils2.c\
-cub3d_utils3.c\
-cub3d_utils4.c\
-init_player_position.c\
-map_funct2.c\
-map_function.c\
-parsing.c\
-free_function.c\
-parsing_texture.c\
-main.c\
-raycasting.c\
-handle_key.c\
-floor.c\
-raycast_dda.c\
-raycasting_tex.c\
-init_image.c\
-get_next_line.c\
-get_next_line_utils.c\
+LIBFT_DIRECTORY = libft/
 
-CC = cc
+LIBFT = $(LIBFT_DIRECTORY)libft.a
 
-CFLAGS = -Wall -Wextra -Werror
-CFLAGS =
-LIBFLAGS = -lmlx -framework OpenGL -framework AppKit
-OBJ = $(SRC:.c=.o)
-INC = cube3d.h
-LIB = libft.a
-FSAN = -g 
-INC = ../include
+GAME_DIRECTORY = game/
 
-all: $(NAME)
+GAME_FILE = floor.c          handle_key.c     init_image.c     main.c           minimap.c        raycast_dda.c    raycasting.c     raycasting_tex.c
 
-$(NAME): $(OBJ)
-				@Make -C ./libft
-				@mv ./libft/libft.a ./
-				@$(CC) $(CFLAGS) $(FSAN) $(BUFFER) $(LIB) $(LIBFLAGS) $(OBJ) -o $@
-				@echo "THE GAME IS READY, YOU CAN RUN IT"
-				@echo "Usage ./cub3d [map.cub]"
+GNL_DIRECTORY = get_next_line/
 
-%.o: %.c 
-		@$(CC) $(CFLAGS) -I $(INC) -c $<
+GNL_FILE = get_next_line.c get_next_line_utils.c
 
-clean :
-				@rm -rf *.o
-fclean : clean
-				@echo "Cleaning..."
-				@rm -rf libft.a
-				@rm -rf $(NAME)
-				@Make fclean -C ./libft
+PARSING_DIRECTORY = parsing/
+
+PARSING_FILE = color.c                cub3d_utils.c          cub3d_utils3.c         free_function.c        map_funct2.c           parsing.c\
+               color2.c               cub3d_utils2.c         cub3d_utils4.c         init_player_position.c map_function.c         parsing_texture.c
+
+
+HEADERS = -I includes
+
+MLX = -L miniLibX -lmlx -framework OpenGL -framework AppKit
+
+OBJS = $(addprefix $(OBJECTS_DIRECTORY)$(GAME_DIRECTORY), $(GAME_FILE:.c=.o)) $(addprefix $(OBJECTS_DIRECTORY)$(PARSING_DIRECTORY), $(PARSING_FILE:.c=.o)) $(addprefix $(OBJECTS_DIRECTORY)$(GNL_DIRECTORY), $(GNL_FILE:.c=.o))
+
+SOURCES_DIRECTORY = src/
+
+OBJECTS_DIRECTORY = obj/
+
+FLAGS = -Wall -Wextra -Werror
+
+FLAGS =
+
+CC = arch -x86_64 gcc
+
+$(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c
+	$(CC) $(FLAGS) $(HEADERS) $(MLX) -c $< -o $@
+
+all:$(NAME)
+
+$(LIBFT):
+	@echo "make $(LIBFT)"
+	@arch -x86_64 make -sC $(LIBFT_DIRECTORY)
+	@arch -x86_64 make bonus -sC $(LIBFT_DIRECTORY)
+
+$(OBJECTS_DIRECTORY):
+	mkdir -p $@
+	mkdir -p $(OBJECTS_DIRECTORY)$(GAME_DIRECTORY)
+	mkdir -p $(OBJECTS_DIRECTORY)$(PARSING_DIRECTORY)
+	mkdir -p $(OBJECTS_DIRECTORY)$(GNL_DIRECTORY)
+
+
+
+$(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJS)
+	$(CC) $(FLAGS) $(MLX) $(HEADERS) $(OBJS) $(LIBFT) -o $(NAME)
+
+
+
+clean:
+	rm -Rf $(OBJECTS_DIRECTORY)
+	@make clean -sC $(LIBFT_DIRECTORY)
+
+
+fclean: clean
+	rm -f $(NAME)
+	@make fclean -sC $(LIBFT_DIRECTORY)
+
 re: fclean all
+
+.PHONY: all clean fclean re

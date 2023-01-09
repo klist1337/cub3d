@@ -3,32 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassofi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: acouliba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 11:42:04 by eassofi           #+#    #+#             */
-/*   Updated: 2021/11/15 13:46:23 by eassofi          ###   ########.fr       */
+/*   Created: 2021/11/04 18:22:52 by acouliba          #+#    #+#             */
+/*   Updated: 2021/11/20 16:09:23 by acouliba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long	nb;
+	unsigned int	nbr;
 
-	nb = n;
-	if (fd < 0)
-		return ;
-	if (nb < 0)
+	nbr = n;
+	if (n < 0)
 	{
+		nbr = -n;
 		ft_putchar_fd('-', fd);
-		nb = -nb;
 	}
-	if (nb < 10)
-		ft_putchar_fd(nb + '0', fd);
-	else
-	{
-		ft_putnbr_fd(nb / 10, fd);
-		ft_putnbr_fd(nb % 10, fd);
-	}
+	if (nbr >= 10)
+		ft_putnbr_fd(nbr / 10, fd);
+	ft_putchar_fd((nbr % 10) + 48, fd);
 }

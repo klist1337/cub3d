@@ -3,45 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: acouliba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 14:53:41 by eassofi           #+#    #+#             */
-/*   Updated: 2022/02/27 17:19:17 by eassofi          ###   ########.fr       */
+/*   Created: 2021/11/01 19:35:42 by acouliba          #+#    #+#             */
+/*   Updated: 2021/11/20 14:15:08 by acouliba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 static int	ft_isspace(char c)
 {
-	return (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
-		|| c == ' ');
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
+	return (0);
 }
 
-long	ft_atoi(const char *str)
+static int	ft_check(long nb, int signe)
 {
-	long	r;
-	int		sign;
-
-	r = 0;
-	sign = 1;
-	if (*str == '\0')
-		return (0);
-	while (ft_isspace(*str))
+	if (nb < 0)
 	{
-		str++;
+		if (signe == 1)
+			return (-1);
+		else if (signe == -1)
+			return (0);
 	}
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-		{
-			sign *= -1;
-		}
-		str++;
-	}
-	while (*str && (*str >= '0' && *str <= '9'))
-	{
-		r = r * 10 + *str++ - '0';
-	}
-	return (sign * r);
+	return (signe * nb);
 }
+
+int	ft_atoi(const char *str)
+{
+	long	nb;
+	int		i;
+	int		signe;
+
+	nb = 0;
+	i = 0;
+	signe = 1;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '-')
+	{
+		signe = -1;
+		i++;
+	}
+	else if (str[i] == '+')
+		i++;
+	while (ft_isdigit(str[i]))
+	{
+		nb = (nb * 10) + (str[i] - 48);
+		i++;
+	}
+	return (ft_check(nb, signe));
+}
+/*#include <stdio.h>
+#include <stdlib.h>
+int	main(int	ac, char	**av)
+{
+	printf("%d\n", atoi(av[1]));
+	printf("%d\n", ft_atoi(av[1]));
+}*/

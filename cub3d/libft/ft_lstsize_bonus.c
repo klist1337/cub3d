@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassofi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: acouliba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/18 15:15:27 by eassofi           #+#    #+#             */
-/*   Updated: 2021/11/18 15:15:35 by eassofi          ###   ########.fr       */
+/*   Created: 2021/11/17 13:16:41 by acouliba          #+#    #+#             */
+/*   Updated: 2021/11/20 15:09:33 by acouliba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	size_t	len;
+	int		i;
+	t_list	*head;
 
-	len = 0;
-	while (lst)
+	i = 0;
+	head = lst;
+	while (head)
 	{
-		lst = lst->next;
-		len++;
+		i++;
+		head = head->next;
 	}
-	return (len);
+	return (i);
 }
