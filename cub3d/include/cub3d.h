@@ -33,6 +33,10 @@
 # define TEXT_H 64
 # define ON_DESTROY 17
 
+# define GREY 0x808080
+# define WHITE 0xFFFFFF
+# define BLACK 0x000000
+
 typedef struct s_cub
 {
 	int		*width;

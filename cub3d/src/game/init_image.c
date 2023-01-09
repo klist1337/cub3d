@@ -23,13 +23,21 @@
 
 void	put_pixel(t_mlx *mlx, int x, int y, int color)
 {
-	char *pixel;
+//    mlx->img.data[y * W + x] = mlx->buffer[0][400];
+//    return;
+    char *pixel;
 
 	pixel = (char *)mlx->img.data + (y * mlx->img.size_line + x * (mlx->img.bpp / 8));
 	*(int *)pixel = color;
 }
 
-void dda(t_point p1, t_point p2,t_mlx *mlx)
+void	put_pixel2(t_mlx *mlx, int x, int y, int color)
+{
+    mlx->img.data[y * W + x] = mlx->texture[6][50];
+    return;
+}
+
+void dda(t_point p1, t_point p2, t_mlx *mlx, int color)
 {
 	// calculate the dx and dy values
 	int dx = p2.x - p1.x;
@@ -49,63 +57,98 @@ void dda(t_point p1, t_point p2,t_mlx *mlx)
 	// draw the line
 	for (int i = 0; i <= steps; i++)
 	{
-		// plot the current point
-//		plot(round(x), round(y));
-		put_pixel(mlx, (int)x, (int)y, 0xFFFFFF);
-
+		put_pixel(mlx, (int)x, (int)y, color);
 		// increment the x and y values
 		x += xIncrement;
 		y += yIncrement;
 	}
 }
 
-void	square(int x, int y, int radius, t_mlx *mlx)
+
+void	square(t_point point, int radius, t_mlx *mlx, int color)
 {
 	t_point	fake_p1;
 	t_point	fake_p2;
 
-	fake_p1.x = x - radius;
-	fake_p1.y = y - radius;
-	fake_p2.x = x + radius;
-	fake_p2.y = y - radius;
-	while (fake_p2.y <= y + radius)
+	fake_p1.x = point.x - radius;
+	fake_p1.y = point.y - radius;
+	fake_p2.x = point.x + radius;
+	fake_p2.y = point.y - radius;
+	while (fake_p2.y <= point.y + radius)
 	{
-		dda(fake_p1, fake_p2, mlx);
+		dda(fake_p1, fake_p2, mlx, color);
 		fake_p2.y++;
 		fake_p1.y++;
 	}
 }
+
+void draw_bg(t_mlx *mlx, int radius)
+{
+    int		i;
+    int		j;
+    int     x;
+    int     y;
+    t_point point;
+
+    radius = 4;
+    j = 0;
+    point.y = j;
+    x = 0;
+    y = mlx->height;
+    while (j < mlx->height)
+    {
+        x = maximum(x, mlx->width_tab[j]);
+        j++;
+    }
+    t_img *img;
+//    img->img = mlx_xpm_file_to_image(mlx->mlx, "pics_xpm/wood.xpm", &x, &y);
+//    img->data = (int *)mlx_get_data_addr(img->img, &img->bpp,
+//                                         &img->size_line, &img->endian);
+
+    j = 0;
+    point.y = j;
+    while (j < y)
+    {
+        i = 0;
+        point.x = i;
+        while (i < x){
+            square(point, radius, mlx, GREY);
+            point.x += radius * 2 + 1;
+            i++;
+        }
+        point.y += radius * 2 + 1;
+        j++;
+    }
+}
+
 
 void draw_map(t_mlx *mlx)
 {
 	int		i;
 	int		j;
 	int 	radius;
-	int 	x;
-	int 	y;
+    t_point point;
 
-	radius = 2;
-	i = 0;
+    radius = 4;
+    draw_bg(mlx, radius);
+    i = 0;
 	j = 0;
-	t_point p1 = {.x = 0, .y = 10};
-	t_point p2 = {.x = 100, .y = 200};
-//	dda(p1, p2, mlx);
-//	square(100, 100, 2, mlx);
-
-	y = j;
+    point.y = j;
 	while (j < mlx->height)
 	{
 		i = 0;
-		x = i;
+        point.x = i;
 		while (i < mlx->width_tab[j]){
 			if (mlx->matrix[j][i] == 1){
-				square(x, y, radius, mlx);
+				square(point, radius, mlx, BLACK);
 			}
-			x += radius * 2 + 1;
-			i++;
+            point.x += radius * 2;
+            point.x++;
+            i++;
 		}
-		y += radius * 2 + 1;
-		j++;
+        point.y += radius * 2;
+        point.y++;
+        j++;
 	}
 }
 
@@ -164,7 +207,7 @@ void	load_image(t_mlx *mlx, int *texture, char *path, t_img *img)
 	mlx_destroy_image(mlx->mlx, img->img);
 }
 
-void	load_texture(t_mlx *mlx)
+void	 load_texture(t_mlx *mlx)
 {
 	t_img	img;
 
