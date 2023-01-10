@@ -139,8 +139,13 @@ void draw_map(t_mlx *mlx)
 		i = 0;
         point.x = i;
 		while (i < mlx->width_tab[j]){
+			printf("%f %f\n", mlx->cub.pos_x,  mlx->cub.pos_y);
 			if (mlx->matrix[j][i] == 1){
 				square(point, radius, mlx, BLACK);
+			}
+			else if ((int) mlx->cub.pos_x == i && (int) mlx->cub.pos_y == j)
+			{
+				square(point, radius, mlx, RED);
 			}
             point.x += radius * 2;
             point.x++;
