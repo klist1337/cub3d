@@ -90,7 +90,6 @@ void draw_bg(t_mlx *mlx, int radius)
     int     y;
     t_point point;
 
-    radius = 4;
     j = 0;
     point.y = j;
     x = 0;
@@ -112,7 +111,7 @@ void draw_bg(t_mlx *mlx, int radius)
         i = 0;
         point.x = i;
         while (i < x){
-            square(point, radius, mlx, GREY);
+            square(point, radius, mlx, BLACK);
             point.x += radius * 2 + 1;
             i++;
         }
@@ -121,39 +120,48 @@ void draw_bg(t_mlx *mlx, int radius)
     }
 }
 
+//distance between two points
+float distance(t_point p1, t_point p2)
+{
+    float x = p2.x - p1.x;
+    float y = p2.y - p1.y;
+    return sqrt(x * x + y * y);
+}
 
 void draw_map(t_mlx *mlx)
 {
-	int		i;
-	int		j;
+    t_point	cube;
 	int 	radius;
+    t_point player;
     t_point point;
 
-    radius = 4;
+    radius = 2;
     draw_bg(mlx, radius);
-    i = 0;
-	j = 0;
-    point.y = j;
-	while (j < mlx->height)
+    cube.x = 0;
+    cube.y = 0;
+    player.x = (int)(mlx->cub.pos_x);
+    player.y = (int)(mlx->cub.pos_y);
+    point.y = cube.y;
+//    printf("%f %f %d %d\n", mlx->cub.pos_x,  mlx->cub.pos_y, (int) roundl(mlx->cub.pos_x), (int) roundl(mlx->cub.pos_y));
+    while (cube.y < mlx->height)
 	{
-		i = 0;
-        point.x = i;
-		while (i < mlx->width_tab[j]){
-			printf("%f %f\n", mlx->cub.pos_x,  mlx->cub.pos_y);
-			if (mlx->matrix[j][i] == 1){
-				square(point, radius, mlx, BLACK);
-			}
-			else if ((int) mlx->cub.pos_x == i && (int) mlx->cub.pos_y == j)
-			{
-				square(point, radius, mlx, RED);
-			}
+        cube.x = 0;
+        point.x = cube.x;
+		while (cube.x < mlx->width_tab[cube.y]){
+            if (distance(point, player) < 100 || 1)
+            {
+                if (mlx->matrix[cube.y][cube.x] == 1)
+                    square(point, radius, mlx, GREY);
+                if (player.x == cube.y && player.y == cube.x)
+                    square(point, radius, mlx, RED);
+            }
             point.x += radius * 2;
             point.x++;
-            i++;
+            cube.x++;
 		}
         point.y += radius * 2;
         point.y++;
-        j++;
+        cube.y++;
 	}
 }
 

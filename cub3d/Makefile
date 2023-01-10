@@ -52,7 +52,7 @@ $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c
 all:$(NAME)
 
 $(LIBFT):
-	@echo "make $(LIBFT)"
+	@arch -x86_64 echo "make $(LIBFT)"
 	@arch -x86_64 make -sC $(LIBFT_DIRECTORY)
 	@arch -x86_64 make bonus -sC $(LIBFT_DIRECTORY)
 
