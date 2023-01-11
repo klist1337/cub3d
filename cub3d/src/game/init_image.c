@@ -82,7 +82,13 @@ void	square(t_square util)
 	}
 }
 
-void draw_bg(t_mlx *mlx, int radius)
+void square_player(t_square util, t_point player)
+{
+//    util.point.x -= player.x;
+//    util.point.y -= player.y;
+    square(util);
+}
+void draw_bg(t_mlx *mlx, int radius, t_point player)
 {
     int		i;
     int		j;
@@ -114,7 +120,7 @@ void draw_bg(t_mlx *mlx, int radius)
         i = 0;
         util.point.x = i;
         while (i < x){
-            square(util);
+            square_player(util, player);
             util.point.x += radius * 2 + 1;
             i++;
         }
@@ -139,11 +145,11 @@ void draw_map(t_mlx *mlx)
 
     util.radius = 2;
     util.mlx = mlx;
-    draw_bg(mlx, util.radius);
-    cube.x = 0;
-    cube.y = 0;
     player.x = (int)(mlx->cub.pos_y);
     player.y = (int)(mlx->cub.pos_x);
+    draw_bg(mlx, util.radius, player);
+    cube.x = 0;
+    cube.y = 0;
     util.point.y = cube.y;
 //    printf("%f %f %d %d\n", mlx->cub.pos_x,  mlx->cub.pos_y, (int) roundl(mlx->cub.pos_x), (int) roundl(mlx->cub.pos_y));
     while (cube.y < mlx->height)
@@ -156,12 +162,12 @@ void draw_map(t_mlx *mlx)
             if (dist == 0)
             {
                 util.color = RED;
-                square(util);
+                square_player(util, player);
             }
             if (dist <= 10 && mlx->matrix[cube.y][cube.x] == 1)
             {
                 util.color = GREY;
-                square(util);
+                square_player(util, player);
             }
             if (player.x == cube.x && player.y ==  cube.y)
             {
