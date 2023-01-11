@@ -65,18 +65,18 @@ void dda(t_point p1, t_point p2, t_mlx *mlx, int color)
 }
 
 
-void	square(t_point point, int radius, t_mlx *mlx, int color)
+void	square(t_square util)
 {
 	t_point	fake_p1;
 	t_point	fake_p2;
 
-	fake_p1.x = point.x - radius;
-	fake_p1.y = point.y - radius;
-	fake_p2.x = point.x + radius;
-	fake_p2.y = point.y - radius;
-	while (fake_p2.y <= point.y + radius)
+	fake_p1.x = util.point.x - util.radius;
+	fake_p1.y = util.point.y - util.radius;
+	fake_p2.x = util.point.x + util.radius;
+	fake_p2.y = util.point.y - util.radius;
+	while (fake_p2.y <= util.point.y + util.radius)
 	{
-		dda(fake_p1, fake_p2, mlx, color);
+		dda(fake_p1, fake_p2, util.mlx, util.color);
 		fake_p2.y++;
 		fake_p1.y++;
 	}
@@ -88,10 +88,12 @@ void draw_bg(t_mlx *mlx, int radius)
     int		j;
     int     x;
     int     y;
-    t_point point;
+    t_square util;
 
     j = 0;
-    point.y = j;
+    util.radius = radius;
+    util.mlx = mlx;
+    util.point.y = j;
     x = 0;
     y = mlx->height;
     while (j < mlx->height)
@@ -105,17 +107,18 @@ void draw_bg(t_mlx *mlx, int radius)
 //                                         &img->size_line, &img->endian);
 
     j = 0;
-    point.y = j;
+    util.point.y = j;
+    util.color = BLACK;
     while (j < y)
     {
         i = 0;
-        point.x = i;
+        util.point.x = i;
         while (i < x){
-            square(point, radius, mlx, BLACK);
-            point.x += radius * 2 + 1;
+            square(util);
+            util.point.x += radius * 2 + 1;
             i++;
         }
-        point.y += radius * 2 + 1;
+        util.point.y += radius * 2 + 1;
         j++;
     }
 }
@@ -131,36 +134,48 @@ float distance(t_point p1, t_point p2)
 void draw_map(t_mlx *mlx)
 {
     t_point	cube;
-	int 	radius;
     t_point player;
-    t_point point;
+    t_square util;
 
-    radius = 2;
-    draw_bg(mlx, radius);
+    util.radius = 2;
+    util.mlx = mlx;
+    draw_bg(mlx, util.radius);
     cube.x = 0;
     cube.y = 0;
-    player.x = (int)(mlx->cub.pos_x);
-    player.y = (int)(mlx->cub.pos_y);
-    point.y = cube.y;
+    player.x = (int)(mlx->cub.pos_y);
+    player.y = (int)(mlx->cub.pos_x);
+    util.point.y = cube.y;
 //    printf("%f %f %d %d\n", mlx->cub.pos_x,  mlx->cub.pos_y, (int) roundl(mlx->cub.pos_x), (int) roundl(mlx->cub.pos_y));
     while (cube.y < mlx->height)
 	{
+        util.point.x = 0;
         cube.x = 0;
-        point.x = cube.x;
-		while (cube.x < mlx->width_tab[cube.y]){
-            if (distance(point, player) < 100 || 1)
+        while (cube.x < mlx->width_tab[cube.y]){
+            float dist = distance(player, cube);
+            printf("x %d y %d %f\n", cube.x, cube.y, dist);
+            if (dist == 0)
             {
-                if (mlx->matrix[cube.y][cube.x] == 1)
-                    square(point, radius, mlx, GREY);
-                if (player.x == cube.y && player.y == cube.x)
-                    square(point, radius, mlx, RED);
+                util.color = RED;
+                square(util);
             }
-            point.x += radius * 2;
-            point.x++;
+            if (dist <= 10 && mlx->matrix[cube.y][cube.x] == 1)
+            {
+                util.color = GREY;
+                square(util);
+            }
+            if (player.x == cube.x && player.y ==  cube.y)
+            {
+                printf("%f\n", dist);
+            }
+            util.point.x += util.radius * 2;
+            util.point.x++;
             cube.x++;
 		}
-        point.y += radius * 2;
-        point.y++;
+//        break;
+//        exit(0);
+
+        util.point.y += util.radius * 2;
+        util.point.y++;
         cube.y++;
 	}
 }

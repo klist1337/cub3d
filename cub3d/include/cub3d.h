@@ -151,6 +151,14 @@ typedef struct s_mlx
 	t_img	img;
 }			t_mlx;
 
+typedef struct s_square{
+    t_point point;
+    int     radius;
+    t_mlx   *mlx;
+    int     color;
+    int     size;
+} t_square;
+
 /****** RAYCASTING FUNCT ******/
 unsigned long	creatergb(int r, int g, int b);
 void			raycasting(t_mlx *mlx);
