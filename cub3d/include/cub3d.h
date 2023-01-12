@@ -27,8 +27,8 @@
 # define ROT_LEFT 0
 # define MV_FORWRD 13
 # define MV_BACK 1
-# define W 640
-# define H 480
+# define W 600
+# define H 609
 # define TEXT_W 64
 # define TEXT_H 64
 # define ON_DESTROY 17
@@ -37,6 +37,11 @@
 # define WHITE 0xFFFFFF
 # define BLACK 0x000000
 # define RED 0xFF0000
+
+# define TRANSLATE_X 0
+# define TRANSLATE_Y 50
+# define CUBE_RADIUS 2
+# define MINIMAP_LIMIT 20
 
 typedef struct s_cub
 {

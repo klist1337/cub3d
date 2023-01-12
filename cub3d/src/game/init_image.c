@@ -82,13 +82,41 @@ void	square(t_square util)
 	}
 }
 
-void square_player(t_square util, t_point player)
+//distance between two points
+float distance(t_point p1, t_point p2)
 {
-//    util.point.x -= player.x;
-//    util.point.y -= player.y;
+    float x = p2.x - p1.x;
+    float y = p2.y - p1.y;
+    return sqrt(x * x + y * y);
+}
+
+
+//translate.x = (int)mlx->cub.pos_x + 20;
+//translate.y = (int)mlx->cub.pos_y + 20;
+
+
+
+void square_player(t_square util, t_point player, t_point translate)
+{
+    float dist;
+
+    if (util.point.x > player.x + MINIMAP_LIMIT || util.point.y > player.y + MINIMAP_LIMIT
+        || util.point.x < player.x - MINIMAP_LIMIT || util.point.y < player.y - MINIMAP_LIMIT)
+        return;
+    dist = distance(player, util.point);
+
+    util.point.x -= translate.x;
+    util.point.y -= translate.y;
+    util.point.x += TRANSLATE_X;
+    util.point.y += TRANSLATE_Y;
+    util.point.x = util.point.x + util.radius * 2 * util.point.x;
+    util.point.y = util.point.y + util.radius * 2 * util.point.y;
+    if (util.point.x + util.radius > W || util.point.y + util.radius > H
+        || util.point.x - util.radius < 0 || util.point.y - util.radius < 0)
+        return;
     square(util);
 }
-void draw_bg(t_mlx *mlx, int radius, t_point player)
+void draw_bg(t_mlx *mlx, int radius, t_point player, t_point translate)
 {
     int		i;
     int		j;
@@ -118,23 +146,14 @@ void draw_bg(t_mlx *mlx, int radius, t_point player)
     while (j < y)
     {
         i = 0;
-        util.point.x = i;
         while (i < x){
-            square_player(util, player);
-            util.point.x += radius * 2 + 1;
+            util.point.y = j;
+            util.point.x = i;
+            square_player(util, player, translate);
             i++;
         }
-        util.point.y += radius * 2 + 1;
         j++;
     }
-}
-
-//distance between two points
-float distance(t_point p1, t_point p2)
-{
-    float x = p2.x - p1.x;
-    float y = p2.y - p1.y;
-    return sqrt(x * x + y * y);
 }
 
 void draw_map(t_mlx *mlx)
@@ -142,46 +161,43 @@ void draw_map(t_mlx *mlx)
     t_point	cube;
     t_point player;
     t_square util;
+    t_point translate;
 
-    util.radius = 2;
+    util.radius = CUBE_RADIUS;
     util.mlx = mlx;
     player.x = (int)(mlx->cub.pos_y);
     player.y = (int)(mlx->cub.pos_x);
-    draw_bg(mlx, util.radius, player);
+
+//    util.point.x = 10;
+//    util.point.y = 10;
+
+    translate.x = player.x - 10;
+    translate.y = player.y - 10;
+    draw_bg(mlx, util.radius, player, translate);
     cube.x = 0;
     cube.y = 0;
     util.point.y = cube.y;
 //    printf("%f %f %d %d\n", mlx->cub.pos_x,  mlx->cub.pos_y, (int) roundl(mlx->cub.pos_x), (int) roundl(mlx->cub.pos_y));
     while (cube.y < mlx->height)
 	{
-        util.point.x = 0;
         cube.x = 0;
         while (cube.x < mlx->width_tab[cube.y]){
-            float dist = distance(player, cube);
-            printf("x %d y %d %f\n", cube.x, cube.y, dist);
-            if (dist == 0)
-            {
-                util.color = RED;
-                square_player(util, player);
-            }
-            if (dist <= 10 && mlx->matrix[cube.y][cube.x] == 1)
+            util.point = cube;
+            if (mlx->matrix[cube.y][cube.x] == 1)
             {
                 util.color = GREY;
-                square_player(util, player);
+                square_player(util, player, translate);
             }
             if (player.x == cube.x && player.y ==  cube.y)
             {
-                printf("%f\n", dist);
+                util.color = RED;
+                square_player(util, player, translate);
             }
-            util.point.x += util.radius * 2;
-            util.point.x++;
             cube.x++;
 		}
 //        break;
 //        exit(0);
 
-        util.point.y += util.radius * 2;
-        util.point.y++;
         cube.y++;
 	}
 }
