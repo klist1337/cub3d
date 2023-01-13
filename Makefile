@@ -6,7 +6,7 @@
 #    By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 12:22:16 by eassofi           #+#    #+#              #
-#    Updated: 2022/10/15 21:58:55 by eassofi          ###   ########.fr        #
+#    Updated: 2023/01/13 18:42:06 by eassofi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,12 +42,12 @@ OBJECTS_DIRECTORY = obj/
 
 FLAGS = -Wall -Wextra -Werror
 
-FLAGS =
+FLAGS =  -g -fsanitize=address
 
 CC = arch -x86_64 gcc
 
 $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c
-	$(CC) $(FLAGS) $(HEADERS) $(MLX) -c $< -o $@
+	$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
 
 all:$(NAME)
 

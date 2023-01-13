@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:13:19 by eassofi           #+#    #+#             */
-/*   Updated: 2022/09/27 04:57:10 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/12 18:37:01 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ void	remplace_by_one(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i])
+	while (i < (int)ft_strlen(line) - 2)
 	{
-		while (ft_isspace(line[i]))
-		{
+		if (ft_isspace(line[i]))
 			line[i] = '1';
-			i++;
-		}
 		i++;
 	}
 }
@@ -38,12 +35,12 @@ char	*fill_space_by_one(char *line, t_mlx *mlx)
 	if (!new)
 		return (NULL);
 	i = -1;
-	while (line[++i])
+	while (++i < (int)ft_strlen(line) - 2)
 		new[i] = line[i];
 	i--;
 	while (++i < mlx->width - 1)
 		new[i] = '1';
-	new[mlx->width] = '\0';
+	new[mlx->width - 1] = '\0';
 	return (new);
 }
 
