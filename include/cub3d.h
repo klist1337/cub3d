@@ -13,8 +13,8 @@
 #ifndef CUB3D_H
 
 # define CUB3D_H
-//# include "mlx.h"
-# include "../miniLibX/mlx.h"
+//# include "../miniLibX/mlx.h"
+# include "mlx.h"
 # include <math.h>
 # include <sys/time.h>
 # include "../src/get_next_line/get_next_line.h"
@@ -114,10 +114,17 @@ typedef struct s_img
 	int				img_height;
 }						t_img;
 
-typedef struct s_point{
+typedef struct s_point
+{
 	int		x;
 	int		y;
 }	t_point;
+
+typedef struct s_pointf
+{
+	float	x;
+	float	y;
+}	t_pointf;
 
 typedef struct s_mlx
 {
@@ -156,13 +163,14 @@ typedef struct s_mlx
 	t_img	img;
 }			t_mlx;
 
-typedef struct s_square{
-    t_point point;
-    int     radius;
-    t_mlx   *mlx;
-    int     color;
-    int     size;
-} t_square;
+typedef struct s_square
+{
+	t_point	point;
+	int		radius;
+	t_mlx	*mlx;
+	int		color;
+	int		size;
+}	t_square;
 
 /****** RAYCASTING FUNCT ******/
 unsigned long	creatergb(int r, int g, int b);
@@ -250,4 +258,12 @@ char			*copy_path(char *s1);
 void			count_elmt(t_mlx *mlx, char *str);
 int				compare_element(char *str);
 void			print_map(t_mlx *mlx);
+void			put_pixel(t_mlx *mlx, int x, int y, int color);
+float			distance(t_point p1, t_point p2);
+void			draw_map(t_mlx *mlx);
+void			square(t_square util);
+void			put_pixel(t_mlx *mlx, int x, int y, int color);
+void			dda(t_point p1, t_point p2, t_mlx *mlx, int color);
+void			square_player(t_square util, t_point player, t_point translate);
+
 #endif

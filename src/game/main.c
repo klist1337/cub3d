@@ -12,8 +12,7 @@
 
 #include "../../include/cub3d.h"
 
-
-int matrix_and_raycasting(t_mlx *mlx, char **av)
+int	matrix_and_raycasting(t_mlx *mlx, char **av)
 {
 	if (fill_matrix(mlx, av) || mlx->start_pos == '\0')
 	{
@@ -37,7 +36,7 @@ int matrix_and_raycasting(t_mlx *mlx, char **av)
 	return (1);
 }
 
-int cub3d(t_mlx *mlx, char **av, char *line, int fd)
+int	cub3d(t_mlx *mlx, char **av, char *line, int fd)
 {
 	if (!empty_map_or_directory(av))
 		return (0);

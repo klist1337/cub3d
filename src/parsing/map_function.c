@@ -104,7 +104,6 @@ void	fill_map(t_mlx *mlx, char **av)
 	fill(mlx, line, fd);
 }
 
-
 void	first_map(t_mlx *mlx, char **av)
 {
 	int		fd;
@@ -131,4 +130,3 @@ void	first_map(t_mlx *mlx, char **av)
 	}
 	fill_map(mlx, av);
 }
-

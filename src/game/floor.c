@@ -44,7 +44,7 @@ void	floorcast(t_mlx *mlx)
 	int		p;
 	float	posz;
 	int		y;
-	t_cub cub;
+	t_cub	cub;
 
 	y = -1;
 	init_cub(&cub);

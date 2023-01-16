@@ -18,8 +18,8 @@ LIBFT = $(LIBFT_DIRECTORY)libft.a
 
 GAME_DIRECTORY = game/
 
-GAME_FILE = floor.c      handle_key2.c		handle_key.c     init_image.c     main.c           minimap.c        raycast_dda.c    raycasting.c     raycasting_tex.c\
-						close_window.c
+GAME_FILE = floor.c      handle_key2.c     handle_key.c     init_image.c     main.c           minimap.c        raycast_dda.c    raycasting.c     raycasting_tex.c kader.c kader_2.c close_window.c
+
 GNL_DIRECTORY = get_next_line/
 
 GNL_FILE = get_next_line.c get_next_line_utils.c
@@ -32,7 +32,7 @@ PARSING_FILE = color.c                cub3d_utils.c          cub3d_utils3.c     
 
 HEADERS = -I includes
 
-MLX = -L miniLibX -lmlx -framework OpenGL -framework AppKit
+MLX = -lmlx -framework OpenGL -framework AppKit
 
 OBJS = $(addprefix $(OBJECTS_DIRECTORY)$(GAME_DIRECTORY), $(GAME_FILE:.c=.o)) $(addprefix $(OBJECTS_DIRECTORY)$(PARSING_DIRECTORY), $(PARSING_FILE:.c=.o)) $(addprefix $(OBJECTS_DIRECTORY)$(GNL_DIRECTORY), $(GNL_FILE:.c=.o))
 
