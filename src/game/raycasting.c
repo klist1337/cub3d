@@ -88,7 +88,8 @@ void	raycasting(t_mlx *mlx)
 	load_texture(mlx);
 	create_img(mlx);
 	mlx_loop_hook(mlx->mlx, &main_loop, mlx);
-	mlx_key_hook(mlx->win, do_key, mlx);
-	mlx_hook(mlx->win, ON_DESTROY, 0, close_window, mlx);
+//	mlx_key_hook(mlx->win, do_key, mlx);
+    mlx_hook(mlx->win, 2, 0, do_key, mlx);mlx_hook(mlx->win, 2, 0, do_key, mlx);
+    mlx_hook(mlx->win, ON_DESTROY, 0, close_window, mlx);
 	mlx_loop(mlx->mlx);
 }
