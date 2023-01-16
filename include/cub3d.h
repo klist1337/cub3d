@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 12:09:40 by eassofi           #+#    #+#             */
-/*   Updated: 2022/09/27 05:02:30 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/16 16:16:01 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct s_img
 typedef struct s_point{
 	int		x;
 	int		y;
-} t_point;
+}	t_point;
 
 typedef struct s_mlx
 {
@@ -170,6 +170,12 @@ void			raycasting(t_mlx *mlx);
 void			raycaster(t_mlx *mlx);
 int				do_key(int key, t_mlx *mlx);
 void			move_key(int key, t_mlx *mlx);
+void			move_left(t_mlx *mlx);
+void			move_right(t_mlx *mlx);
+void			rotate_right(t_mlx *mlx);
+void			rotate_left(t_mlx *mlx);
+void			move_forward(t_mlx *mlx);
+void			move_backward(t_mlx *mlx);
 void			draw(t_mlx *mlx);
 int				main_loop(t_mlx *mlx);
 void			floorcast(t_mlx *mlx);
@@ -216,7 +222,6 @@ int				get_tex(char *str, char **path, int *flag);
 int				get_texture(t_mlx *mlx, char *line, int *j);
 int				isvalid_texture(char *path);
 int				check_texture(char **path);
-
 
 /********  UTILS  ***************/
 

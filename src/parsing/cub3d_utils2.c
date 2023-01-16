@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:13:19 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/12 18:37:01 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/16 16:31:17 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void	init_raycasting_param(t_mlx *mlx)
 	mlx->cub.height = 0;
 	mlx->start_x = 0;
 	mlx->start_y = 0;
-	mlx->cub.dir_x = 1;  //-1 - 1
-	mlx->cub.dir_y = 0; // always 0
-	mlx->cub.plane_x = 0; // always 0;
-	mlx->cub.plane_y = 0.66; // -0.66 --- 0.66
+	mlx->cub.dir_x = 1;
+	mlx->cub.dir_y = 0;
+	mlx->cub.plane_x = 0;
+	mlx->cub.plane_y = 0.66;
 }
 
 void	init_param_mlx(t_mlx *mlx)

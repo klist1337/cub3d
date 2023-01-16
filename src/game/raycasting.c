@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 18:15:53 by eassofi           #+#    #+#             */
-/*   Updated: 2022/09/27 04:57:10 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/16 16:26:00 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void	draw_in_window(t_mlx *mlx)
 	x = -1;
 	init_cub(&cub);
 	mlx_clear_window(mlx->mlx, mlx->win);
-	// if (mlx->re_buff == 1)
-	// 	init_buff(mlx);
 	while (++x < W)
 	{
 		mlx->cub.camera_x = 2 * x / (double)W - 1;
@@ -76,8 +74,7 @@ void	draw_in_window(t_mlx *mlx)
 
 void	raycaster(t_mlx *mlx)
 {
-	floorcast(mlx); // texture for floor and celling
-	//floorcast_color(mlx); // color for floor and celling
+	floorcast(mlx);
 	draw_in_window(mlx);
 }
 
@@ -88,8 +85,7 @@ void	raycasting(t_mlx *mlx)
 	load_texture(mlx);
 	create_img(mlx);
 	mlx_loop_hook(mlx->mlx, &main_loop, mlx);
-//	mlx_key_hook(mlx->win, do_key, mlx);
-    mlx_hook(mlx->win, 2, 0, do_key, mlx);mlx_hook(mlx->win, 2, 0, do_key, mlx);
-    mlx_hook(mlx->win, ON_DESTROY, 0, close_window, mlx);
+	mlx_hook(mlx->win, 2, 0, do_key, mlx);
+	mlx_hook(mlx->win, ON_DESTROY, 0, close_window, mlx);
 	mlx_loop(mlx->mlx);
 }

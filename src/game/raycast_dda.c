@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:55:47 by eassofi           #+#    #+#             */
-/*   Updated: 2022/09/27 04:57:10 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/16 16:29:05 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	initial_distside_y(t_mlx *mlx, t_cub *cub, t_dda *dda)
 	else
 	{
 		dda->step_y = 1;
-		cub->side_disty = (cub->map_y + 1.0 - mlx->cub.pos_y) * cub->delta_disty;
+		cub->side_disty = (cub->map_y + 1.0 - mlx->cub.pos_y)
+			* cub->delta_disty;
 	}
 }
 
@@ -59,12 +60,9 @@ void	perfom_dda(t_mlx *mlx, t_dda *dda, t_cub *cub)
 {
 	while (dda->hit == 0)
 	{
-		//jump to next square, either in x-direction, or in y-direction
 		if (cub->side_distx < cub->side_disty)
 		{
 			cub->side_distx += cub->delta_distx;
-			// if (cub->map_x == 0)
-			// 	cub->map_x += 1;
 			cub->map_x += dda->step_x;
 			dda->side = 0;
 		}
@@ -74,8 +72,6 @@ void	perfom_dda(t_mlx *mlx, t_dda *dda, t_cub *cub)
 			cub->map_y += dda->step_y;
 			dda->side = 1;
 		}
-		//check if ray as hit a wall
-		//printf("map_x = %d -- map_y = %d\n",cub->map_x, cub->map_y);
 		if (mlx->matrix[cub->map_x][cub->map_y] == 1)
 			dda->hit = 1;
 	}
@@ -84,19 +80,14 @@ void	perfom_dda(t_mlx *mlx, t_dda *dda, t_cub *cub)
 void	dda_algoritm(t_mlx *mlx, t_cub *cub, t_dda *dda)
 {
 	dda->hit = 0;
-	//calculate step and initial sidedist;
 	initial_distside_x(mlx, cub, dda);
 	initial_distside_y(mlx, cub, dda);
 	perfom_dda(mlx, dda, cub);
-	/**calculate distance projected on camera direction
-	(Euclidean distance would give us fisheye effect)***/
 	if (dda->side == 0)
 		cub->perpwalldist = cub->side_distx - cub->delta_distx;
 	else
 		cub->perpwalldist = cub->side_disty - cub->delta_disty;
-	// calculate height of line to draw on screen
 	cub->line_height = (int)(H / cub->perpwalldist);
-	//calculate lowest and highest pixel to fill in current stripe
 	cub->draw_start = (-1) * cub->line_height / 2 + H / 2;
 	if (cub->draw_start < 0)
 		cub->draw_start = 0;

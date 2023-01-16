@@ -6,7 +6,7 @@
 #    By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 12:22:16 by eassofi           #+#    #+#              #
-#    Updated: 2023/01/13 18:42:06 by eassofi          ###   ########.fr        #
+#    Updated: 2023/01/16 16:19:34 by eassofi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ LIBFT = $(LIBFT_DIRECTORY)libft.a
 
 GAME_DIRECTORY = game/
 
-GAME_FILE = floor.c          handle_key.c     init_image.c     main.c           minimap.c        raycast_dda.c    raycasting.c     raycasting_tex.c
-
+GAME_FILE = floor.c      handle_key2.c		handle_key.c     init_image.c     main.c           minimap.c        raycast_dda.c    raycasting.c     raycasting_tex.c\
+						close_window.c
 GNL_DIRECTORY = get_next_line/
 
 GNL_FILE = get_next_line.c get_next_line_utils.c

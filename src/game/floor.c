@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 22:20:35 by eassofi           #+#    #+#             */
-/*   Updated: 2022/09/27 04:57:10 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/16 16:04:40 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,14 @@ void	floor_castx(t_cub *cub, int y, t_mlx *mlx)
 		cub->floor_texture = 3;
 		cub->ceiling_texture = 6;
 		color = mlx->texture[cub->floor_texture][TEXT_W * cub->ty + cub->tx];
-		color = (color >> 1) & 8355711; // make bit daker
+		color = (color >> 1) & 8355711;
 		mlx->buffer[y][x] = color;
 		color = mlx->texture[cub->ceiling_texture][TEXT_W * cub->ty + cub->tx];
-		color = (color >> 1) & 8355711; // make bit daker
+		color = (color >> 1) & 8355711;
 		mlx->buffer[H - y - 1][x] = color;
 	}
 }
 
-//FLOOR CASTING
 void	floorcast(t_mlx *mlx)
 {
 	int		p;
