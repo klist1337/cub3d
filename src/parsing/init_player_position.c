@@ -32,17 +32,17 @@ void	pos2(t_mlx *mlx)
 
 void	pos(t_mlx *mlx)
 {
-	if (mlx->start_pos == 'N')
+	if (mlx->start_pos == 'S')
 	{
 		mlx->cub.dir_x = -1;
 		mlx->cub.dir_y = 0;
-		mlx->cub.plane_y = 0.66;
+		mlx->cub.plane_y = -0.66;
 		mlx->cub.plane_x = 0;
 	}
-	if (mlx->start_pos == 'S')
+	if (mlx->start_pos == 'N')
 	{
 		mlx->cub.dir_x = 1;
-		mlx->cub.plane_y = -0.66;
+		mlx->cub.plane_y = 0.66;
 		mlx->cub.plane_x = 0;
 		mlx->cub.dir_y = 0;
 	}
