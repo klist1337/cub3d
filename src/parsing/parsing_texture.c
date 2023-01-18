@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:47:08 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/18 02:24:13 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/18 18:56:40 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,3 @@ int	get_texture(t_mlx *mlx, char *line, int *j)
 		return (0);
 	return (1);
 }
-

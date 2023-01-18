@@ -6,11 +6,11 @@
 #    By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 12:22:16 by eassofi           #+#    #+#              #
-#    Updated: 2023/01/18 01:56:16 by eassofi          ###   ########.fr        #
+#    Updated: 2023/01/18 19:05:26 by eassofi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cube3d
+NAME = cub3d
 
 LIBFT_DIRECTORY = libft/
 
@@ -18,7 +18,9 @@ LIBFT = $(LIBFT_DIRECTORY)libft.a
 
 GAME_DIRECTORY = game/
 
-GAME_FILE = floor.c      handle_key2.c     handle_key.c     init_image.c     main.c           minimap.c        raycast_dda.c    raycasting.c     raycasting_tex.c kader.c kader_2.c close_window.c
+GAME_FILE = floor.c      handle_key2.c     handle_key.c     init_image.c     main.c     raycast_dda.c    raycasting.c     raycasting_tex.c close_window.c
+
+GAME_FILE_BONUS = floor.c      handle_key2.c     handle_key.c     init_image_bonus.c     main.c    raycast_dda.c    raycasting_bonus.c     raycasting_tex.c mini_map.c mini_map2.c close_window.c
 
 GNL_DIRECTORY = get_next_line/
 
@@ -36,13 +38,13 @@ MLX = -lmlx -framework OpenGL -framework AppKit
 
 OBJS = $(addprefix $(OBJECTS_DIRECTORY)$(GAME_DIRECTORY), $(GAME_FILE:.c=.o)) $(addprefix $(OBJECTS_DIRECTORY)$(PARSING_DIRECTORY), $(PARSING_FILE:.c=.o)) $(addprefix $(OBJECTS_DIRECTORY)$(GNL_DIRECTORY), $(GNL_FILE:.c=.o))
 
+OBJS_BONUS = $(addprefix $(OBJECTS_DIRECTORY)$(GAME_DIRECTORY), $(GAME_FILE_BONUS:.c=.o)) $(addprefix $(OBJECTS_DIRECTORY)$(PARSING_DIRECTORY), $(PARSING_FILE:.c=.o)) $(addprefix $(OBJECTS_DIRECTORY)$(GNL_DIRECTORY), $(GNL_FILE:.c=.o))
+
 SOURCES_DIRECTORY = src/
 
 OBJECTS_DIRECTORY = obj/
 
-FLAGS = 
-
-FLAGS =  -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS =  -Wall -Wextra -Werror -g 
 
 CC = arch -x86_64 gcc
 
@@ -66,8 +68,12 @@ $(OBJECTS_DIRECTORY):
 
 $(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJS)
 	$(CC) $(FLAGS) $(MLX) $(HEADERS) $(OBJS) $(LIBFT) -o $(NAME)
+	
+$(BONUS) : $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJS_BONUS)
+	$(CC) $(FLAGS) $(MLX) $(HEADERS) $(OBJS_BONUS) $(LIBFT) -o $(NAME)
 
-
+bonus : $(BONUS)
+				
 
 clean:
 	rm -Rf $(OBJECTS_DIRECTORY)

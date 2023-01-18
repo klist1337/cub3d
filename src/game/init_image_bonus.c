@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:48:40 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/18 18:50:05 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/18 03:43:34 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ void	draw(t_mlx *mlx)
 			mlx->img.data[y * W + x] = mlx->buffer[y][x];
 		}
 	}
+	draw_map(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img.img, 0, 0);
 }

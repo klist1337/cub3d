@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/15 18:15:53 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/18 18:40:12 by eassofi          ###   ########.fr       */
+/*   Created: 2023/01/18 18:38:41 by eassofi           #+#    #+#             */
+/*   Updated: 2023/01/18 18:40:03 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	draw_in_window(t_mlx *mlx)
 
 void	raycaster(t_mlx *mlx)
 {
-	floorcast_color(mlx);
+	floorcast(mlx);
 	draw_in_window(mlx);
 }
 
