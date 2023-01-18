@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:48:40 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/13 19:40:01 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/18 03:43:34 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,20 @@ void	load_image(t_mlx *mlx, int *texture, char *path, t_img *img)
 void	load_texture(t_mlx *mlx)
 {
 	t_img	img;
+	int		i;
 
-	load_image(mlx, mlx->texture[0], mlx->path[0], &img);
-	load_image(mlx, mlx->texture[1], mlx->path[1], &img);
-	load_image(mlx, mlx->texture[2], mlx->path[2], &img);
-	load_image(mlx, mlx->texture[3], mlx->path[3], &img);
+	i = -1;
+	while (++i < 4)
+	{
+		if (!ft_strcmp(mlx->cardinal[i], "NO"))
+			load_image(mlx, mlx->texture[0], mlx->path[i], &img);
+		else if (!ft_strcmp(mlx->cardinal[i], "SO"))
+			load_image(mlx, mlx->texture[1], mlx->path[i], &img);
+		else if (!ft_strcmp(mlx->cardinal[i], "WE"))
+			load_image(mlx, mlx->texture[2], mlx->path[i], &img);
+		else if (!ft_strcmp(mlx->cardinal[i], "EA"))
+			load_image(mlx, mlx->texture[3], mlx->path[i], &img);
+	}
 	load_image(mlx, mlx->texture[6], "pics_xpm/wood.xpm", &img);
 }
 

@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:30:21 by eassofi           #+#    #+#             */
-/*   Updated: 2022/09/27 04:57:10 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/18 02:28:57 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	get_map_elmt(t_mlx *mlx, int fd, char **line)
 		free(*line);
 		mlx->path[j] = 0;
 	}
+	mlx->cardinal[4] = 0;
 	if (!check_nb_elmt(mlx))
 	{
 		print_error("Error : Invalid map\n");

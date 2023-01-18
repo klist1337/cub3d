@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 16:06:51 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/16 16:18:09 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/18 04:00:04 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,20 @@ void	move_key(int key, t_mlx *mlx)
 		move_forward(mlx);
 	if (key == MV_BACK)
 		move_backward(mlx);
-	if (key == MV_RIGHT)
-		move_right(mlx);
-	if (key == MV_LEFT)
+	if (key == MV_RIGHT && (mlx->start_pos == 'N' || mlx->start_pos == 'S'))
 		move_left(mlx);
-	if (key == ROT_RIGHT)
+	if (key == MV_RIGHT && (mlx->start_pos == 'E' || mlx->start_pos == 'W'))
+		move_right(mlx);
+	if (key == MV_LEFT && (mlx->start_pos == 'N' || mlx->start_pos == 'S'))
+		move_right(mlx);
+	if (key == MV_LEFT && (mlx->start_pos == 'W' || mlx->start_pos == 'E'))
+		move_left(mlx);
+	if (key == ROT_RIGHT && (mlx->start_pos == 'N' || mlx->start_pos == 'S'))
+		rotate_left(mlx);
+	if (key == ROT_RIGHT && (mlx->start_pos == 'W' || mlx->start_pos == 'E'))
 		rotate_right(mlx);
-	if (key == ROT_LEFT)
+	if (key == ROT_LEFT && (mlx->start_pos == 'N' || mlx->start_pos == 'S'))
+		rotate_right(mlx);
+	if (key == ROT_LEFT && (mlx->start_pos == 'W' || mlx->start_pos == 'E'))
 		rotate_left(mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 05:13:19 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/16 16:31:17 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/18 04:35:00 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	init_param_mlx(t_mlx *mlx)
 	mlx->celling = 0;
 	mlx->floor = 0;
 	mlx->path = (char **)malloc(sizeof(char *) * 5);
+	mlx->cardinal = (char **)malloc(sizeof(char *) * 5);
 	mlx->nb_elemt = (int *)malloc(sizeof(int) * 6);
 	if (!mlx->path || !mlx->nb_elemt)
 		return ;

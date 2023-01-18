@@ -6,7 +6,7 @@
 #    By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/10 12:22:16 by eassofi           #+#    #+#              #
-#    Updated: 2023/01/16 16:19:34 by eassofi          ###   ########.fr        #
+#    Updated: 2023/01/18 01:56:16 by eassofi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ GNL_FILE = get_next_line.c get_next_line_utils.c
 
 PARSING_DIRECTORY = parsing/
 
-PARSING_FILE = color.c                cub3d_utils.c          cub3d_utils3.c         free_function.c        map_funct2.c           parsing.c\
-               color2.c               cub3d_utils2.c         cub3d_utils4.c         init_player_position.c map_function.c         parsing_texture.c
+PARSING_FILE = color.c                cub3d_utils.c          cub3d_utils3.c         free_function.c        map_funct2.c           parsing.c check_texture.c\
+               color2.c               cub3d_utils2.c         cub3d_utils4.c         init_player_position.c map_function.c         parsing_texture.c 
 
 
 HEADERS = -I includes
@@ -40,9 +40,9 @@ SOURCES_DIRECTORY = src/
 
 OBJECTS_DIRECTORY = obj/
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = 
 
-FLAGS =  -g -fsanitize=address
+FLAGS =  -Wall -Wextra -Werror -g -fsanitize=address
 
 CC = arch -x86_64 gcc
 

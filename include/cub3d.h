@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 12:09:40 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/16 16:16:01 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/18 03:39:28 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,13 @@ typedef struct s_point
 	int		y;
 }	t_point;
 
+typedef struct s_var
+{
+	char	**matrix;
+	int		nb;
+	int		flag;
+}	t_var;
+
 typedef struct s_pointf
 {
 	float	x;
@@ -134,6 +141,7 @@ typedef struct s_mlx
 	char	*data;
 	int		**matrix;
 	int		**texture;
+	char	**cardinal;
 	int		color;
 	int		height;
 	int		*width_tab;
@@ -226,7 +234,7 @@ int				empty_map_or_directory(char **av);
 int				check_file_and_extension(char **av, int fd);
 void			get_height(t_mlx *mlx, char *line, int fd);
 void			join_texture(char **matrix, int *flag, char **path);
-int				get_tex(char *str, char **path, int *flag);
+int				get_tex(char *str, char **path, int *flag, char **cardinal);
 int				get_texture(t_mlx *mlx, char *line, int *j);
 int				isvalid_texture(char *path);
 int				check_texture(char **path);

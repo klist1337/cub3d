@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 23:17:07 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/16 16:16:54 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/18 03:41:43 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	main_loop(t_mlx *mlx)
 int	select_key(int key)
 {
 	return (key == MV_FORWRD || key == MV_BACK
-		|| key == ROT_RIGHT || key == ROT_LEFT
-		|| key == MV_LEFT || key == MV_RIGHT);
+		|| key == ROT_LEFT || key == ROT_RIGHT
+		|| key == MV_RIGHT || key == MV_LEFT);
 }
 
 void	move_forward(t_mlx *mlx)

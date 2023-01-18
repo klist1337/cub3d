@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:51:17 by eassofi           #+#    #+#             */
-/*   Updated: 2022/09/27 04:57:10 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/18 04:47:00 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	texture_calculation(t_cub *cub, t_mlx *mlx, t_dda *dda, int x)
 		cub->wall_x = mlx->cub.pos_y + cub->perpwalldist * cub->raydir_y;
 	else
 		cub->wall_x = mlx->cub.pos_x + cub->perpwalldist * cub->raydir_x;
-	cub->wall_x -= floorf(cub->wall_x);
+	cub->wall_x -= floor(cub->wall_x);
 	cub->text_x = (int)(cub->wall_x * (double)(TEXT_W));
 	if (dda->side == 0 && cub->raydir_x > 0)
 		cub->text_x = TEXT_W - cub->text_x - 1;

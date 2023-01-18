@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:47:08 by eassofi           #+#    #+#             */
-/*   Updated: 2022/09/27 04:57:10 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/18 02:24:13 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,41 @@ void	join_texture(char **matrix, int *flag, char **path)
 	*flag = 1;
 }
 
-int	get_tex(char *str, char **path, int *flag)
+int	get_path(t_var *var, char *str, char **path, char **cardinal)
 {
-	char	**matrix;
-	int		nb;
-
-	nb = 0;
-	matrix = NULL;
 	if ((str[0] == 'N' && str[1] == 'O') || (str[0] == 'S' && str[1] == 'O')
 		|| (str[0] == 'W' && str[1] == 'E') || (str[0] == 'E' && str[1] == 'A'))
 	{
-		matrix = ft_split(str, ' ');
-		nb = get_nb_of_split(matrix);
-		if (nb == 1 || (matrix[1] && ft_strlen(matrix[1]) == 1))
+		var->matrix = ft_split(str, ' ');
+		var->nb = get_nb_of_split(var->matrix);
+		if (var->nb == 1 || (var->matrix[1] && ft_strlen(var->matrix[1]) == 1))
 		{
 			print_error("Error : bad texture\n");
 			return (0);
 		}
-		else if (nb == 2 && ft_strlen(matrix[1]) > 1)
+		else if (var->nb == 2 && ft_strlen(var->matrix[1]) > 1)
 		{
-			*path = copy_path(matrix[1]);
-			*flag = 1;
+			*path = copy_path(var->matrix[1]);
+			cardinal[0] = strdup(var->matrix[0]);
+			var->flag = 1;
 		}
-		else if (nb > 2)
-			join_texture(matrix, flag, path);
-		free_char_matrix(matrix);
+		else if (var->nb > 2)
+			join_texture(var->matrix, &var->flag, path);
+		free_char_matrix(var->matrix);
 	}
+	return (1);
+}
+
+int	get_tex(char *str, char **path, int *flag, char **cardinal)
+{
+	t_var	var;
+
+	var.nb = 0;
+	var.matrix = NULL;
+	var.flag = 0;
+	if (!get_path(&var, str, path, cardinal))
+		return (0);
+	*flag = var.flag;
 	return (1);
 }
 
@@ -62,16 +71,20 @@ int	get_texture(t_mlx *mlx, char *line, int *j)
 {
 	int		flag;
 	char	*s;
+	char	*cardinal;
 
 	flag = 0;
 	s = NULL;
-	if (get_tex(line, &s, &flag))
+	cardinal = NULL;
+	if (get_tex(line, &s, &flag, &cardinal))
 	{
 		if (flag == 1)
 		{
 			mlx->path[*j] = ft_strdup(s);
+			mlx->cardinal[*j] = ft_strdup(cardinal);
 			*j = *j + 1;
 			free(s);
+			free(cardinal);
 		}
 	}
 	else
@@ -79,34 +92,3 @@ int	get_texture(t_mlx *mlx, char *line, int *j)
 	return (1);
 }
 
-int	isvalid_texture(char *path)
-{
-	int	fd;
-
-	fd = open(path, O_RDONLY, 0777);
-	if (fd < 0)
-	{	
-		print_error("Error: Texture file don't exist\n");
-		return (0);
-	}
-	if (check_extension_map(path, "xpm"))
-	{
-		print_error("Error : wrong extension file (xpm)\n");
-		return (0);
-	}
-	close (fd);
-	return (1);
-}
-
-int	check_texture(char **path)
-{
-	int	i;
-
-	i = -1;
-	while (path[++i])
-	{
-		if (!isvalid_texture(path[i]))
-			return (1);
-	}
-	return (0);
-}
