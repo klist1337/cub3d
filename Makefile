@@ -12,6 +12,8 @@
 
 NAME = cub3d
 
+NAME_BONUS = cub3d_bonus
+
 LIBFT_DIRECTORY = libft/
 
 LIBFT = $(LIBFT_DIRECTORY)libft.a
@@ -46,17 +48,19 @@ OBJECTS_DIRECTORY = obj/
 
 FLAGS =  -Wall -Wextra -Werror -g 
 
-CC = arch -x86_64 gcc
+CC = gcc
 
 $(OBJECTS_DIRECTORY)%.o : $(SOURCES_DIRECTORY)%.c
 	$(CC) $(FLAGS) $(HEADERS) -c $< -o $@
 
 all:$(NAME)
 
+bonus:$(NAME_BONUS)
+
 $(LIBFT):
-	@arch -x86_64 echo "make $(LIBFT)"
-	@arch -x86_64 make -sC $(LIBFT_DIRECTORY)
-	@arch -x86_64 make bonus -sC $(LIBFT_DIRECTORY)
+	@echo "make $(LIBFT)"
+	@make -sC $(LIBFT_DIRECTORY)
+	@make bonus -sC $(LIBFT_DIRECTORY)
 
 $(OBJECTS_DIRECTORY):
 	mkdir -p $@
@@ -68,12 +72,10 @@ $(OBJECTS_DIRECTORY):
 
 $(NAME): $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJS)
 	$(CC) $(FLAGS) $(MLX) $(HEADERS) $(OBJS) $(LIBFT) -o $(NAME)
-	
-$(BONUS) : $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJS_BONUS)
-	$(CC) $(FLAGS) $(MLX) $(HEADERS) $(OBJS_BONUS) $(LIBFT) -o $(NAME)
 
-bonus : $(BONUS)
-				
+
+$(NAME_BONUS) : $(LIBFT) $(OBJECTS_DIRECTORY) $(OBJS_BONUS)
+	$(CC) $(FLAGS) $(MLX) $(HEADERS) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS)
 
 clean:
 	rm -Rf $(OBJECTS_DIRECTORY)
@@ -81,7 +83,7 @@ clean:
 
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_BONUS)
 	@make fclean -sC $(LIBFT_DIRECTORY)
 
 re: fclean all
