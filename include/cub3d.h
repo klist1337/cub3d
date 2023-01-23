@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 12:09:40 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/18 03:39:28 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/20 14:58:58 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include "../libft/libft.h"
 
 # define ESC 53
-# define MV_RIGHT 124
-# define MV_LEFT 123
-# define ROT_RIGHT 2
-# define ROT_LEFT 0
+# define MV_RIGHT 2
+# define MV_LEFT 0
+# define ROT_RIGHT 124
+# define ROT_LEFT 123
 # define MV_FORWRD 13
 # define MV_BACK 1
 # define W 600

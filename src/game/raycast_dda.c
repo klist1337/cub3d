@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:55:47 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/16 16:29:05 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/20 15:02:19 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	init_dda_utils(t_cub *cub, t_mlx *mlx)
 	cub->map_x = (int)mlx->cub.pos_x;
 	cub->map_y = (int)mlx->cub.pos_y;
 	if (cub->raydir_x == 0)
-		cub->delta_distx = 1;
+		cub->delta_distx = 1e30;
 	else
 		cub->delta_distx = fabs(1 / cub->raydir_x);
 	if (cub->raydir_y == 0)
-		cub->delta_distx = 1;
+		cub->delta_distx = 1e30;
 	else
 		cub->delta_disty = fabs(1 / cub->raydir_y);
 }

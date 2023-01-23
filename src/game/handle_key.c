@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 23:17:07 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/18 03:41:43 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/20 15:01:04 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	move_backward(t_mlx *mlx)
 
 int	do_key(int key, t_mlx *mlx)
 {
-	mlx->cub.mv_speed = 0.5;
-	mlx->cub.rot_speed = 0.3;
+	mlx->cub.mv_speed = 0.6;
+	mlx->cub.rot_speed = 0.4;
 	if (select_key(key))
 	{
 		mlx_clear_window(mlx->mlx, mlx->win);
