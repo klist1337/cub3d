@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:51:17 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/18 04:47:00 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/23 17:45:09 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	step_texture(t_mlx *mlx, t_cub *cub, t_dda *dda, int x)
 
 	step = 1.0 * TEXT_H / cub->line_height;
 	y = cub->draw_start - 1;
-	text_pos = (cub->draw_start - H / 2 + cub->line_height) * step;
+	text_pos = (cub->draw_start - H / 2 + cub->line_height / 2) * step;
 	while (++y < cub->draw_end)
 	{
 		cub->text_y = (int)text_pos & (TEXT_H - 1);

@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:55:47 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/20 15:02:19 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/23 18:06:41 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_dda_utils(t_cub *cub, t_mlx *mlx)
 	else
 		cub->delta_distx = fabs(1 / cub->raydir_x);
 	if (cub->raydir_y == 0)
-		cub->delta_distx = 1e30;
+		cub->delta_distx = 1;
 	else
 		cub->delta_disty = fabs(1 / cub->raydir_y);
 }
@@ -88,7 +88,7 @@ void	dda_algoritm(t_mlx *mlx, t_cub *cub, t_dda *dda)
 	else
 		cub->perpwalldist = cub->side_disty - cub->delta_disty;
 	cub->line_height = (int)(H / cub->perpwalldist);
-	cub->draw_start = (-1) * cub->line_height / 2 + H / 2;
+	cub->draw_start = -cub->line_height / 2 + H / 2;
 	if (cub->draw_start < 0)
 		cub->draw_start = 0;
 	cub->draw_end = cub->line_height / 2 + H / 2;
