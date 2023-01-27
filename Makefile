@@ -10,9 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 
-NAME_BONUS = cub3d_bonus
+NAME_BONUS = cub3D_bonus
 
 LIBFT_DIRECTORY = libft/
 
