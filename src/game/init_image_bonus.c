@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_image.c                                       :+:      :+:    :+:   */
+/*   init_image_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:48:40 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/18 03:43:34 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/24 22:05:38 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	load_texture(t_mlx *mlx)
 		else if (!ft_strcmp(mlx->cardinal[i], "EA"))
 			load_image(mlx, mlx->texture[3], mlx->path[i], &img);
 	}
-	load_image(mlx, mlx->texture[6], "pics_xpm/wood.xpm", &img);
+	load_image(mlx, mlx->texture[6], "pics_xpm/tex_sky.xpm", &img);
 }
 
 void	create_img(t_mlx *mlx)

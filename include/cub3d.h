@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 12:09:40 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/20 14:58:58 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/27 22:20:42 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,7 +232,7 @@ void			first_map(t_mlx *mlx, char **av);
 int				check_map(t_mlx *mlx, char **av);
 int				empty_map_or_directory(char **av);
 int				check_file_and_extension(char **av, int fd);
-void			get_height(t_mlx *mlx, char *line, int fd);
+int				get_height(t_mlx *mlx, char *line, int fd);
 void			join_texture(char **matrix, int *flag, char **path);
 int				get_tex(char *str, char **path, int *flag, char **cardinal);
 int				get_texture(t_mlx *mlx, char *line, int *j);

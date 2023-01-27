@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 11:26:15 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/18 19:04:02 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/27 22:22:53 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ int	cub3d(t_mlx *mlx, char **av, char *line, int fd)
 		print_error("Error : Invalid map\n");
 		return (0);
 	}
-	get_height(mlx, line, fd);
-	if (!matrix_and_raycasting(mlx, av))
+	if (!get_height(mlx, line, fd) || !matrix_and_raycasting(mlx, av))
 		return (0);
 	return (1);
 }

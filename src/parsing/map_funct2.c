@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:33:56 by eassofi           #+#    #+#             */
-/*   Updated: 2022/09/27 04:57:10 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/27 22:41:12 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,18 @@ int	check_file_and_extension(char **av, int fd)
 	return (1);
 }
 
-void	get_height(t_mlx *mlx, char *line, int fd)
+int	get_height(t_mlx *mlx, char *line, int fd)
 {
 	while (line)
 	{
 		++mlx->height;
 		free(line);
 		line = get_next_line(fd);
-		while (line && ft_strlen(line) == 1)
-			skip_line_space(&line, fd);
+		if (line && ft_strlen(line) == 1)
+		{
+			print_error("Invalid map\n");
+			return (0);
+		}
 	}
+	return (1);
 }

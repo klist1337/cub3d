@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: acouliba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 12:32:50 by acouliba          #+#    #+#             */
-/*   Updated: 2021/11/20 16:13:47 by acouliba         ###   ########.fr       */
+/*   Updated: 2023/01/24 21:08:32 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,3 @@ char	*ft_strchr(const char *s, int c)
 		return (str + i);
 	return (0);
 }
-/*#include<stdio.h>
-int	main()
-{
-	printf("%s\n", ft_strchr("tripouille", 't' + 256));
-}*/

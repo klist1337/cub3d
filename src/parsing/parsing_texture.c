@@ -6,7 +6,7 @@
 /*   By: eassofi <eassofi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 02:47:08 by eassofi           #+#    #+#             */
-/*   Updated: 2023/01/18 18:56:40 by eassofi          ###   ########.fr       */
+/*   Updated: 2023/01/27 21:57:46 by eassofi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	get_path(t_var *var, char *str, char **path, char **cardinal)
 	{
 		var->matrix = ft_split(str, ' ');
 		var->nb = get_nb_of_split(var->matrix);
-		if (var->nb == 1 || (var->matrix[1] && ft_strlen(var->matrix[1]) == 1))
+		if (var->nb == 1 || var->nb > 2
+			|| (var->matrix[1] && ft_strlen(var->matrix[1]) == 1)
+			|| ft_strlen(var->matrix[0]) != 2)
 		{
 			print_error("Error : bad texture\n");
 			return (0);
